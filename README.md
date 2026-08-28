@@ -27,4 +27,6 @@
     * When the page loads the placeholders for dynamic content is filled with the fetched data.
     * This gives us the best of the both worlds (CSR, SSR).
 
-* [☑️] API Routes
+* [☑️] API Routes.
+* Assets & Metadata.
+* Client and Server Components -> By default components render on server side.
