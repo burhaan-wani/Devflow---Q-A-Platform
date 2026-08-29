@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Theme from "./Theme";
+import MobileNav from "@/components/forms/mobile-navigation";
 
 const Navbar = () => {
   return (
@@ -10,8 +11,9 @@ const Navbar = () => {
       </Link>
 
       <p className="max-sm:hidden visible text-white">Search Bar</p>
-      <div>
+      <div className="flex items-center gap-2.5">
         <Theme />
+        <MobileNav />
       </div>
     </div>
   );

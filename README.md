@@ -7,7 +7,7 @@
   - Dynamic routes -> users/[id].
   - Group routes -> (root)/users/[id].
 - [☑️] Different rendering strategies.
-  - CSR(client side regeneration):
+  - CSR(client side rendering):
     - Pages are build during build process.
     - Result is cached and the cached data is shared while visiting the website in the form CDN's.
     - Good for website where content remains same not dynamic.
@@ -30,3 +30,15 @@
 * [☑️] API Routes.
 * Assets & Metadata.
 * Client and Server Components -> By default components render on server side.
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
