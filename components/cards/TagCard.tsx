@@ -17,7 +17,7 @@ const TagCard = ({ id, name, questions, showCount, compact }: Props) => {
       href={ROUTES.TAG(id)}
       className="flex justify-between text-sm py-2"
     >
-      <Badge className="bg-gray-600 text-white p-4 rounded-sm flex items-center gap-2">
+      <Badge className="bg-gray-800 text-white p-4 rounded-sm flex items-center gap-2">
         <i className={`${getDevIconClassName(name)}`}></i>
         <span>{name}</span>
       </Badge>

@@ -4,7 +4,7 @@ import MobileNav from "@/components/forms/mobile-navigation";
 
 const Navbar = () => {
   return (
-    <div className="p-5 fixed z-50 bg-gray-900 flex justify-between items-center w-full  text-accent-foreground">
+    <div className="p-5 fixed z-50 bg-gray-900 flex justify-between items-center w-full  text-accent-foreground border-b">
       <Link href={"/"} className="flex gap-0.5 font-bold text-xl">
         <span className="text-orange-800">Dev</span>
         Flow

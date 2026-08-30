@@ -40,7 +40,13 @@ const RightSideBar = () => {
         <h1 className="font-bold text-lg">Tags</h1>
         <div className="space-y-3 mt-5">
           {popularTags.map(({ _id, name, questions }) => (
-            <TagCard id={_id} name={name} questions={questions} showCount />
+            <TagCard
+              key={name}
+              id={_id}
+              name={name}
+              questions={questions}
+              showCount
+            />
           ))}
         </div>
       </div>
