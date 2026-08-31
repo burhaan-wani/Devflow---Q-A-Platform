@@ -30,8 +30,8 @@
 * [☑️] API Routes.
 * Assets & Metadata.
 * Client and Server Components -> By default components render on server side.
-*
-*
+* State Management in Nextjs, URL state management.
+* Access query in server component.
 *
 *
 *
