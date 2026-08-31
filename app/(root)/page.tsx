@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import Filter from "@/components/filters/Filter";
 import SearchBar from "@/components/search/SearchBar";
 import ROUTES from "@/constants/routes";
@@ -18,31 +19,31 @@ const questions = [
       { _id: "1", name: "reactjs" },
       { _id: "2", name: "javascript" },
     ],
-    autor: {
+    author: {
       _id: "1",
       name: "James",
     },
     upvotes: 112,
     answers: 132,
     views: 23,
-    createdAt: "2026-05-10",
+    createdAt: new Date("2026-05-10"),
   },
   {
     _id: "2",
     title: "What is debouncing",
     description: "How to apply debouncing in reactjs",
     tags: [
-      { _id: "1", name: "typescript" },
-      { _id: "2", name: "javascript" },
+      { _id: "3", name: "typescript" },
+      { _id: "4", name: "javascript" },
     ],
-    autor: {
+    author: {
       _id: "2",
       name: "Miles",
     },
     upvotes: 12,
     answers: 32,
     views: 232,
-    createdAt: "2026-06-19",
+    createdAt: new Date(),
   },
 ];
 
@@ -68,7 +69,11 @@ const Home = async ({ searchParams }: Props) => {
         </SearchBar>
       </section>
       <Filter />
-      <section>All Questions</section>
+      <section className="mt-5 space-y-5">
+        {questions.map((question) => (
+          <QuestionCard key={question._id} question={question} />
+        ))}
+      </section>
     </section>
   );
 };

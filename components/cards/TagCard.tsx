@@ -6,7 +6,7 @@ import { getDevIconClassName } from "@/lib/utils";
 interface Props {
   id: string;
   name: string;
-  questions: number;
+  questions?: number;
   showCount?: boolean;
   compact?: boolean;
 }
@@ -21,7 +21,7 @@ const TagCard = ({ id, name, questions, showCount, compact }: Props) => {
         <i className={`${getDevIconClassName(name)}`}></i>
         <span>{name}</span>
       </Badge>
-      <p>{questions}+</p>
+      <p>{questions}</p>
     </Link>
   );
 };
