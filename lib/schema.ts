@@ -19,3 +19,22 @@ export const signUpSchema = z.object({
     .min(1, { message: "Password must be atleast 1 character long" })
     .max(100, { message: "Password length cannot exceed 100 characters" }),
 });
+
+export const askQuestionSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: "Title must atleast 1 character long" })
+    .max(50, { message: "Title cannot exceed 50 characters" }),
+  content: z
+    .string()
+    .min(1, { message: "Description must be atleast 1 character long" }),
+  tags: z
+    .array(
+      z
+        .string()
+        .min(1, { message: "Tag name must be atleast 1 character long" })
+        .max(30, { message: "Tag name cannot exceed 50 characters" }),
+    )
+    .min(1, { message: "A question must have atleast 1 tag" })
+    .max(3, { message: "A question can have max 3 tags" }),
+});

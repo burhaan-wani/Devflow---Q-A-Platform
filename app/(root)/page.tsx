@@ -57,9 +57,9 @@ const Home = async ({ searchParams }: Props) => {
         <Button>
           <Link
             href={ROUTES.ASK_QUESTION}
-            className="text-white bg-orange-500 p-3 rounded-md text-sm w-full "
+            className="text-white bg-orange-500 p-3 rounded-md text-sm w-full font-spaceGrotesk"
           >
-            Hello world
+            Ask Question
           </Link>
         </Button>
       </div>

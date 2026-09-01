@@ -1,0 +1,652 @@
+/* =========================================================
+   Tiptap Editor - Application Dark Theme
+   ========================================================= */
+
+.tt-editor {
+  width: 100%;
+  overflow: hidden;
+
+  background: #1e2939;
+  color: #ffffff;
+
+  border: 1px solid #344054;
+  border-radius: 10px;
+
+  box-shadow: none;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+/* =========================================================
+   Toolbar
+   ========================================================= */
+
+.tt-toolbar {
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+  padding: 6px 10px;
+
+  background: #1e2939;
+  border-bottom: 1px solid #344054;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tt-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================================
+   Toolbar Buttons
+   ========================================================= */
+
+.tt-btn,
+.tt-style-button,
+.tt-color-button {
+  height: 32px;
+  min-width: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  flex: 0 0 auto;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+  background: transparent;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+/* Make SVG icons inherit button color */
+
+.tt-btn svg,
+.tt-style-button svg,
+.tt-color-button svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Hover */
+
+.tt-btn:hover,
+.tt-style-button:hover,
+.tt-color-button:hover {
+  background: #273449;
+  border-color: #3b4a60;
+  color: #ffffff;
+}
+
+/* Active */
+
+.tt-btn.is-active {
+  background: #334155;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+/* Disabled */
+
+.tt-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   Text Style Button
+   ========================================================= */
+
+.tt-style-wrap {
+  flex: 0 0 auto;
+}
+
+.tt-style-button {
+  min-width: 48px;
+  color: #ffffff;
+}
+
+.tt-style-button svg {
+  color: #ffffff;
+}
+
+/* =========================================================
+   Separators
+   ========================================================= */
+
+.tt-separator {
+  width: 1px;
+  height: 22px;
+
+  margin: 0 5px;
+
+  background: #344054;
+
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   Text Color
+   ========================================================= */
+
+.tt-color-wrap {
+  position: relative;
+
+  display: inline-flex;
+
+  flex: 0 0 auto;
+}
+
+.tt-color-button {
+  position: relative;
+  min-width: 38px;
+
+  color: #ffffff;
+}
+
+/* Native color input */
+
+.tt-color-button input {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+/* "A" icon */
+
+.tt-color-a {
+  font-family: Georgia, serif;
+
+  font-size: 19px;
+  line-height: 1;
+
+  color: #ffffff;
+
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* Color indicator */
+
+.tt-color-line {
+  position: absolute;
+
+  left: 8px;
+  bottom: 5px;
+
+  width: 12px;
+  height: 2px;
+
+  border-radius: 999px;
+}
+
+/* =========================================================
+   Color Palette
+   ========================================================= */
+
+.tt-color-menu {
+  display: none;
+
+  position: absolute;
+  z-index: 20;
+
+  top: 38px;
+  left: 0;
+
+  padding: 8px;
+
+  width: 140px;
+
+  grid-template-columns: repeat(4, 24px);
+  gap: 6px;
+
+  border: 1px solid #475467;
+  border-radius: 8px;
+
+  background: #1e2939;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.tt-color-wrap:focus-within .tt-color-menu,
+.tt-color-wrap:hover .tt-color-menu {
+  display: grid;
+}
+
+/* Individual color buttons */
+
+.tt-color-menu button {
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+/* Clear color */
+
+.tt-color-menu .tt-clear-color {
+  background: #1e2939;
+  color: #ffffff;
+
+  font-size: 18px;
+}
+
+/* =========================================================
+   Editor Content
+   ========================================================= */
+
+/*
+ * Fixed height prevents the editor from pushing content
+ * below it further down the page.
+ */
+
+.tt-content {
+  height: 205px;
+
+  padding: 0;
+
+  background: #1e2939;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   ProseMirror Editor
+   ========================================================= */
+
+.tt-content .ProseMirror {
+  /*
+   * Fill the fixed-height editor.
+   */
+  height: 100%;
+
+  /*
+   * Important:
+   * Do not use min-height: 205px here because the editor
+   * should be allowed to scroll rather than grow.
+   */
+  min-height: 0;
+
+  /*
+   * Required so padding doesn't increase the total height.
+   */
+  box-sizing: border-box;
+
+  padding: 18px 16px;
+
+  outline: none;
+
+  background: #1e2939;
+  color: #ffffff;
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  caret-color: #ffffff;
+
+  /*
+   * Scroll content internally.
+   */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /*
+   * Handle long words / URLs gracefully.
+   */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* =========================================================
+   Editor Scrollbar
+   ========================================================= */
+
+.tt-content .ProseMirror {
+  scrollbar-width: thin;
+
+  scrollbar-color: #475569 transparent;
+}
+
+/* Chrome / Edge / Safari */
+
+.tt-content .ProseMirror::-webkit-scrollbar {
+  width: 7px;
+}
+
+.tt-content .ProseMirror::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tt-content .ProseMirror::-webkit-scrollbar-thumb {
+  background: #475569;
+
+  border-radius: 999px;
+}
+
+.tt-content .ProseMirror::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* =========================================================
+   Placeholder
+   ========================================================= */
+
+.tt-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+
+  float: left;
+
+  height: 0;
+
+  pointer-events: none;
+
+  color: #526b8c;
+
+  font-size: 15px;
+}
+
+/* =========================================================
+   Paragraphs
+   ========================================================= */
+
+.tt-content .ProseMirror p {
+  margin: 0 0 0.75em;
+}
+
+.tt-content .ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   Headings
+   ========================================================= */
+
+.tt-content .ProseMirror h1,
+.tt-content .ProseMirror h2,
+.tt-content .ProseMirror h3 {
+  color: #ffffff;
+
+  line-height: 1.25;
+
+  margin: 0.5em 0 0.35em;
+}
+
+.tt-content .ProseMirror h1 {
+  font-size: 28px;
+}
+
+.tt-content .ProseMirror h2 {
+  font-size: 23px;
+}
+
+.tt-content .ProseMirror h3 {
+  font-size: 19px;
+}
+
+/* =========================================================
+   Lists
+   ========================================================= */
+
+/*
+ * Some application/global CSS resets lists with:
+ *
+ *   ul, ol {
+ *     list-style: none;
+ *   }
+ *
+ * These explicit rules restore Tiptap's list markers.
+ */
+
+/* Base list */
+
+.tt-content .ProseMirror ul,
+.tt-content .ProseMirror ol {
+  display: block;
+
+  padding-left: 1.75rem;
+
+  margin: 0.5rem 0;
+}
+
+/* Unordered list */
+
+.tt-content .ProseMirror ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+/* Ordered list */
+
+.tt-content .ProseMirror ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+/* List items */
+
+.tt-content .ProseMirror ul > li,
+.tt-content .ProseMirror ol > li {
+  display: list-item;
+
+  color: #ffffff;
+}
+
+/* List markers */
+
+.tt-content .ProseMirror ul > li::marker,
+.tt-content .ProseMirror ol > li::marker {
+  color: #ffffff;
+}
+
+/* Tiptap wraps list content in paragraphs */
+
+.tt-content .ProseMirror li p {
+  margin: 0;
+}
+
+/* Nested unordered lists */
+
+.tt-content .ProseMirror ul ul {
+  list-style-type: circle;
+}
+
+.tt-content .ProseMirror ul ul ul {
+  list-style-type: square;
+}
+
+/* Nested ordered lists */
+
+.tt-content .ProseMirror ol ol {
+  list-style-type: lower-alpha;
+}
+
+.tt-content .ProseMirror ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* =========================================================
+   Blockquote
+   ========================================================= */
+
+.tt-content .ProseMirror blockquote {
+  margin: 1rem 0;
+
+  padding-left: 1rem;
+
+  border-left: 3px solid #526b8c;
+
+  color: #aab7c8;
+}
+
+/* =========================================================
+   Inline Code
+   ========================================================= */
+
+.tt-content .ProseMirror code {
+  padding: 0.12em 0.3em;
+
+  border-radius: 4px;
+
+  background: #111827;
+  color: #f3f4f6;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  font-size: 0.9em;
+}
+
+/* =========================================================
+   Code Block
+   ========================================================= */
+
+.tt-content .ProseMirror pre {
+  margin: 1rem 0;
+
+  padding: 12px 14px;
+
+  overflow-x: auto;
+
+  border-radius: 7px;
+
+  background: #111827;
+
+  color: #e5e7eb;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  font-size: 13px;
+}
+
+.tt-content .ProseMirror pre code {
+  padding: 0;
+
+  background: transparent;
+
+  color: inherit;
+}
+
+/* =========================================================
+   Links
+   ========================================================= */
+
+.tt-content .ProseMirror a {
+  color: #7db4ff;
+
+  text-decoration: underline;
+}
+
+/* =========================================================
+   Images
+   ========================================================= */
+
+.tt-content .ProseMirror img {
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+
+  margin: 12px 0;
+
+  border-radius: 7px;
+}
+
+/* =========================================================
+   Horizontal Rule
+   ========================================================= */
+
+.tt-content .ProseMirror hr {
+  border: 0;
+
+  border-top: 1px solid #344054;
+
+  margin: 1rem 0;
+}
+
+/* =========================================================
+   Focus State
+   ========================================================= */
+
+.tt-editor:focus-within {
+  border-color: #667085;
+
+  box-shadow: 0 0 0 1px rgba(102, 112, 133, 0.35);
+}
+
+/* =========================================================
+   Validation / Error State
+   ========================================================= */
+
+.tt-editor.has-error {
+  border-color: #f3b067;
+
+  box-shadow: 0 0 0 1px #f3b067;
+}
+
+/* Error message shown below editor */
+
+.tt-editor-error {
+  margin: 0;
+
+  color: #f3b067;
+
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .tt-toolbar {
+    padding: 6px;
+
+    gap: 1px;
+  }
+
+  .tt-separator {
+    margin: 0 3px;
+  }
+
+  .tt-content .ProseMirror {
+    padding: 16px 14px;
+  }
+}

@@ -11,12 +11,6 @@ import {
 } from "react-hook-form";
 import { z } from "zod/v3";
 
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@base-ui/react";
 import Link from "next/link";

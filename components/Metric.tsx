@@ -15,9 +15,9 @@ const Metric = ({
     <div className="flex items-center gap-2">
       <Link href={href as string} className="flex items-center gap-1 text-xs">
         <img src={imgUrl} alt={alt} className={imgStyles} />
-        <span>{value}</span>
+        {isAuthor && <span>{value}</span>}
       </Link>
-      <span className="text-xs font-semibold">{title}</span>
+      {isAuthor && <span className="text-xs font-semibold">{title}</span>}
     </div>
   );
 
