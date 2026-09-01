@@ -5,7 +5,7 @@ const AskQuestion = () => {
   return (
     <div>
       <h1 className="font-bold text-xl">Ask a question</h1>
-      <div className="mt-7">
+      <div className="mt-7 pb-10">
         <QuestionForm />
       </div>
     </div>

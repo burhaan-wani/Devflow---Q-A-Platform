@@ -20,7 +20,7 @@ const popularTags = [
 ];
 const RightSideBar = () => {
   return (
-    <section className="flex-1 pt-24 px-5 border-l bg-gray-900 ">
+    <section className="flex-1 pt-24 px-5 h-screen border-l bg-gray-900 fixed top-0 right-0">
       <div>
         <h1 className="text-lg font-bold">Top Questions</h1>
         <div className="space-y-3 mt-5">
@@ -36,7 +36,7 @@ const RightSideBar = () => {
           ))}
         </div>
       </div>
-      <div className="mt-16">
+      <div className="mt-10">
         <h1 className="font-bold text-lg">Tags</h1>
         <div className="space-y-3 mt-5">
           {popularTags.map(({ _id, name, questions }) => (

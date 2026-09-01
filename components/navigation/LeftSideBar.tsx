@@ -12,7 +12,7 @@ const LeftSideBar = () => {
   const pathname = usePathname();
   const userId = 1;
   return (
-    <section className="min-h-screen w-63.75 pt-24 bg-gray-900 px-4 max-sm:hidden flex flex-col justify-between pb-2 border-r">
+    <section className="min-h-screen w-63.75 pt-24 bg-gray-900 px-4 max-sm:hidden flex flex-col justify-between pb-2 border-r fixed top-0 left-0">
       <div className="space-y-3">
         {SideBarLinks.map((item) => {
           const isActive =

@@ -6,24 +6,64 @@ import { Controller, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import dynamic from "next/dynamic";
-import TiptapEditor from "../editor/TipTap";
+import z from "zod/v3";
+import TagCard from "../cards/TagCard";
 
-const Tiptap = dynamic(() => import("../editor/TipTap"), {
+const TiptapEditor = dynamic(() => import("../editor/TipTap"), {
   ssr: false,
   loading: () => (
-    <div className="h-[150px] w-full rounded-md border border-gray-200 bg-gray-50 animate-pulse p-3" />
+    <div className="h-37.5 w-full rounded-md border border-gray-200 bg-gray-50 animate-pulse p-3" />
   ),
 });
 
 const QuestionForm = () => {
-  const form = useForm({
+  const form = useForm<z.infer<typeof askQuestionSchema>>({
     resolver: zodResolver(askQuestionSchema),
     defaultValues: {
       title: "",
-      content: "<p>Hello world</p>",
+      content: "",
       tags: [],
     },
   });
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    field: { value: string[] },
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const tagInput = e.currentTarget.value.trim();
+      if (
+        tagInput &&
+        tagInput.length < 15 &&
+        field.value.length < 3 &&
+        !field.value.includes(tagInput)
+      ) {
+        form.setValue("tags", [...field.value, tagInput]);
+        e.currentTarget.value = "";
+        form.clearErrors("tags");
+      } else if (tagInput.length > 15) {
+        form.setError("tags", {
+          message: "Tag name can only contain 15 characters",
+        });
+      } else if (field.value.includes(tagInput)) {
+        form.setError("tags", { message: "Tag name already exists" });
+      } else {
+        form.setError("tags", {
+          message: "Question can only have a max of 3 tags",
+        });
+      }
+    }
+  };
+
+  const handleTagRemove = (tag: string, field: { value: string[] }) => {
+    console.log("hi");
+    const filteredTags = field.value.filter((val) => val !== tag);
+    form.setValue("tags", filteredTags);
+    if (filteredTags.length === 0) {
+      form.setError("tags", { message: "Tags are required" });
+    }
+  };
 
   const handleAskQuestion = () => {};
   return (
@@ -84,14 +124,28 @@ const QuestionForm = () => {
               </label>
               <Input
                 required
-                {...field}
                 type="text"
                 id="form-rhf-demo-title"
                 aria-invalid={fieldState.invalid}
                 placeholder={"Add Tags"}
                 autoComplete="off"
                 className="px-3 py-7"
+                onKeyDown={(e) => handleKeyDown(e, field)}
               />
+            </div>
+            <div className="flex justify-start gap-2">
+              {field?.value?.length > 0 &&
+                field?.value?.map((tag) => (
+                  <TagCard
+                    key={tag}
+                    id={tag}
+                    name={tag}
+                    remove
+                    isButton
+                    compact
+                    handleRemove={() => handleTagRemove(tag, field)}
+                  />
+                ))}
             </div>
             <p className="text-sm text-gray-600">
               Add upto 3 tags to describe what your question is about. You need
