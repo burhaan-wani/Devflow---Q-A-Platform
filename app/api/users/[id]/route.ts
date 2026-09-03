@@ -12,14 +12,14 @@ export async function GET(
   try {
     const { id } = await params;
     if (!id) {
-      throw new NotFoundError("ID not found");
+      throw new NotFoundError("ID");
     }
 
     await dbConnect();
 
     const user = await User.findById(id);
     if (!user) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("User");
     }
 
     return NextResponse.json({ success: true, data: user }, { status: 200 });
@@ -35,7 +35,7 @@ export async function PUT(
   try {
     const { id } = await params;
     if (!id) {
-      throw new NotFoundError("ID not found");
+      throw new NotFoundError("ID");
     }
 
     await dbConnect();
@@ -49,7 +49,7 @@ export async function PUT(
 
     const user = await User.findById(id);
     if (!user) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("User");
     }
     const updatedUser = await User.findByIdAndUpdate(id, validatedData.data, {
       new: true,
@@ -71,14 +71,14 @@ export async function DELETE(
   try {
     const { id } = await params;
     if (!id) {
-      throw new NotFoundError("ID not found");
+      throw new NotFoundError("ID");
     }
 
     await dbConnect();
 
     const user = await User.findById(id);
     if (!user) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("User");
     }
     await User.findByIdAndDelete(id);
     return NextResponse.json(

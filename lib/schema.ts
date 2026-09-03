@@ -49,3 +49,12 @@ export const userSchema = z.object({
   portfolio: z.string().optional(),
   reputation: z.number().optional(),
 });
+
+export const accountSchema = z.object({
+  userId: z.string(),
+  name: z.string().min(1).max(100),
+  password: z.string().min(1).max(100).optional(),
+  image: z.string().optional(),
+  provider: z.string(),
+  accountProviderId: z.string(),
+});
